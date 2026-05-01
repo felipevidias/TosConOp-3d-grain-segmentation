@@ -4,38 +4,40 @@
 #include <string>
 
 struct TtosGrainParams {
-    long lambda_support = 15;
-    long lambda_seed = 2;
+    // Preserve more grain-level branches than the 95-grain baseline.
+    long dark_leaf_area_max = 16;
+    long bright_leaf_area_max = 14;
 
-    long support_area_min = 120;
-    long support_area_max = 130000;
+    long dark_max_delta_parent = 24;
+    long bright_max_delta_parent = 24;
 
-    int support_dx_min = 4;
-    int support_dy_min = 4;
-    int support_dz_min = 3;
+    long dark_max_interval_amplitude = 34;
+    long bright_max_interval_amplitude = 34;
 
-    int support_dx_max = 95;
-    int support_dy_max = 95;
-    int support_dz_max = 190;
+    bool show_operator_progress = true;
+    std::size_t operator_progress_every = 200;
+    std::size_t operator_refresh_every = 512;
 
-    int min_active_slices = 3;
-    int min_longest_z_run = 3;
+    long support_area_min = 8;
+    long support_area_max = 180000;
 
-    double support_score_min = 0.95;
+    double support_tree_score_min = 0.022;
+    double support_seed_descendant_score_min = 0.0002;
+    std::size_t max_support_candidates_keep = 100000;
+    std::size_t max_final_grains = 12000;
 
-    std::size_t max_support_candidates_keep = 9000;
-    std::size_t max_final_grains = 3000;
+    // Keep promotion off to avoid swallowing smaller supports.
+    int support_promotion_max_steps = 0;
+    double support_promotion_score_margin = 0.02;
+    double support_promotion_area_ratio_max = 1.60;
 
-    double support_center_nms = 9.0;
-    double support_bbox_overlap_nms = 0.30;
-
+    // Seed selection fully from MIN_TREE descendants.
     long seed_area_min = 1;
-    long seed_area_max = 5000;
-    int seed_min_delta_parent = 2;
+    long seed_area_max = 28000;
+    int seed_min_delta_parent = 1;
 
-    int seed_dx_max = 45;
-    int seed_dy_max = 45;
-    int seed_dz_max = 140;
+    int max_seed_descendant_depth = 110;
+    bool allow_support_fallback_seed = false;
 
     std::string default_input_tif =
         "/home/felipe/Pesquisa-Grain_Seg/Filtro_Conexo/data/processed/EFRGP01_00_roi_core.tif";

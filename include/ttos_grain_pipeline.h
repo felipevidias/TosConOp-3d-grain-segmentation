@@ -9,7 +9,7 @@
 #include "ttos_grain_types.h"
 
 std::vector<SupportCandidate> extract_support_candidates(
-    Tree_of_shapes& tos_support,
+    Tree_of_shapes& tos_filtered,
     const std::vector<cv::Mat>& volume,
     const TtosGrainParams& params,
     double p30,
@@ -21,7 +21,9 @@ std::vector<SupportCandidate> nms_support_candidates(
 
 std::vector<FinalGrain> make_final_grains_from_supports(
     const std::vector<SupportCandidate>& supports,
-    Tree_of_shapes& tos_support);
+    Tree_of_shapes& tos_filtered,
+    const std::vector<cv::Mat>& volume,
+    const TtosGrainParams& params);
 
 std::vector<cv::Mat> build_support_label_volume(
     const std::vector<FinalGrain>& grains,
@@ -30,9 +32,8 @@ std::vector<cv::Mat> build_support_label_volume(
     int depth);
 
 void assign_dark_ttos_seeds(
-    Tree_of_shapes& tos_seed,
+    Tree_of_shapes& tos_filtered,
     const std::vector<cv::Mat>& volume,
-    const std::vector<cv::Mat>& support_labels,
     const TtosGrainParams& params,
     double p50,
     std::vector<FinalGrain>& grains);

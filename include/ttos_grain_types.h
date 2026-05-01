@@ -62,6 +62,12 @@ struct SupportCandidate {
     double mean_intensity = 0.0;
     double fill_ratio = 0.0;
     double score = 0.0;
+
+    double tree_support_score = 0.0;
+    double seed_descendant_score = 0.0;
+    int strong_seed_descendants = 0;
+    long dominant_seed_node_id = -1;
+    double dominance_margin = 0.0;
 };
 
 struct FinalGrain {
@@ -81,10 +87,17 @@ struct FinalGrain {
     double fill_ratio = 0.0;
     double score = 0.0;
 
+    int support_promoted_steps = 0;
+    double support_tree_score = 0.0;
+    double support_seed_descendant_score = 0.0;
+    int support_strong_seed_descendants = 0;
+
     int seed_x = -1;
     int seed_y = -1;
     int seed_z = -1;
-    int seed_value = 255;
+    int seed_value = -1;
 
     bool seed_from_dark_candidate = false;
+    bool seed_found_in_descendants = false;
+    double seed_tree_score = 0.0;
 };
